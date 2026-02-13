@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For Kritti 💖</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="background.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div class="envelope-container" id="envelopeContainer">
+    <div class="envelope" id="envelope">
+      <div class="bubble hidden" id="bubble"></div>
+      <h2>Will you be my Valentine? 💌</h2>
+      <div class="buttons">
+        <button id="yesBtn">Yes 🥰</button>
+        <button id="noBtn">No 🙈</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="final-screen hidden" id="finalScreen">
+    <h1>You Chose Infinite Love ❤️</h1>
+    <p>Lifetime subscription activated!</p>
+    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="250">
+  </div>
+
+
+  <!-- Audio -->
+  <audio id="romanticMusic" src="romantic.mp3" loop></audio>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
