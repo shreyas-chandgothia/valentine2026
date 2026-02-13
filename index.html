@@ -5,39 +5,126 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <video autoplay muted loop playsinline class="video-bg">
-    <source src="background.mp4" type="video/mp4">
-  </video>
+  <div id="app">
 
-  <div class="overlay"></div>
+    <video autoplay muted loop playsinline class="video-bg">
+      <source src="background.mp4" type="video/mp4">
+    </video>
 
-  <div class="envelope-container" id="envelopeContainer">
-    <div class="envelope" id="envelope">
-      <div class="bubble hidden" id="bubble"></div>
-      <h2>Will you be my Valentine? 💌</h2>
-      <div class="buttons">
-        <button id="yesBtn">Yes 🥰</button>
-        <button id="noBtn">No 🙈</button>
+    <div id="dimOverlay"></div>
+
+    <div class="overlay"></div>
+
+    <div class="envelope-container" id="envelopeContainer">
+      <div class="envelope" id="envelope">
+        <div class="bubble hidden" id="bubble"></div>
+        <h2>Will you be my Valentine? 💌</h2>
+        <div class="buttons">
+          <button id="yesBtn">Yes 🥰</button>
+          <button id="noBtn">No 🙈</button>
+        </div>
       </div>
     </div>
+
+    <div id="storyTransition">
+
+      <div>
+        <h2 id="storyLine1" style="opacity:0; transition: opacity 1s ease;">
+          But love isn’t just a choice.
+        </h2>
+    
+        <h2 id="storyLine2" style="opacity:0; transition: opacity 1s ease; margin-top:10px;">
+          It’s a story.
+        </h2>
+    
+        <h2 id="storyLine3" style="opacity:0; transition: opacity 1s ease; margin-top:60px;">
+          Let’s walk through ours!
+        </h2>
+      </div>
+    
+    </div>
+    
+
+
+    <!-- ========================= -->
+    <!-- MEMORY GRID SCREEN -->
+    <!-- ========================= -->
+
+    <div id="gridScreen" class="hidden">
+
+      <div class="grid-wrapper">
+    
+        <h1 class="grid-title">Our Story</h1>
+    
+        <div class="grid-container">
+    
+        <!-- Envelopes will be injected by JS -->
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- STAGE SCREEN -->
+    <!-- ========================= -->
+
+    <div id="stageScreen" class="hidden">
+
+      <div class="stage-content">
+        <h2 id="stageYear"></h2>
+        <h3 id="stageTitle"></h3>
+        <p id="stageCaption"></p>
+
+        <div class="photo-container"></div>
+
+        <div class="stage-buttons">
+          <button id="backToGrid">⬅ Back to Timeline</button>
+          <button id="nextStage">Next Chapter ➡</button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- POEM SCREEN -->
+    <!-- ========================= -->
+
+    <div id="poemScreen" class="hidden">
+
+      <div class="poem-content">
+        <h2>You and Me</h2>
+        <div id="poemText"></div>
+      </div>
+
+    </div>
+
+
+    <div class="final-screen hidden" id="finalScreen">
+      <h1>You Chose Infinite Love ❤️</h1>
+      <p>Lifetime subscription activated!</p>
+      <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="250">
+    </div>
+
+
+    <!-- Audio -->
+    <audio id="romanticMusic" src="romantic.mp3" loop></audio>
+
+
+    <script src="script.js"></script>
+
   </div>
-
-  <div class="final-screen hidden" id="finalScreen">
-    <h1>You Chose Infinite Love ❤️</h1>
-    <p>Lifetime subscription activated!</p>
-    <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="250">
-  </div>
-
-
-  <!-- Audio -->
-  <audio id="romanticMusic" src="romantic.mp3" loop></audio>
-
-
-  <script src="script.js"></script>
 
 </body>
+
 </html>
