@@ -151,9 +151,20 @@ noBtn.addEventListener("click", () => {
   let side;
 
   // Pick a different random side than previous
-  do {
-    side = Math.floor(Math.random() * 4);
-  } while (side === lastSide);
+  const isMobile = window.innerWidth < 768;
+
+  if (isMobile) {
+    // Only allow top or bottom on mobile
+    do {
+      side = Math.floor(Math.random() * 2) + 2; // 2 or 3 (top/bottom)
+    } while (side === lastSide);
+  } else {
+    // Desktop - allow all 4 sides
+    do {
+      side = Math.floor(Math.random() * 4);
+    } while (side === lastSide);
+  }
+
 
   lastSide = side;
 
@@ -182,6 +193,9 @@ noBtn.addEventListener("click", () => {
     newX = envelopeRect.left + Math.random() * (envelopeRect.width - btnRect.width);
     newY = envelopeRect.bottom + gap;
   }
+
+  newX = Math.max(10, Math.min(newX, window.innerWidth - btnRect.width - 10));
+  newY = Math.max(10, Math.min(newY, window.innerHeight - btnRect.height - 10));
 
   noBtn.style.left = newX + "px";
   noBtn.style.top = newY + "px";
