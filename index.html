@@ -5,9 +5,8 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -27,8 +26,8 @@
         <div class="bubble hidden" id="bubble"></div>
         <h2>Will you be my Valentine? 💌</h2>
         <div class="buttons">
-          <button id="yesBtn">Yes 🥰</button>
-          <button id="noBtn">No 🙈</button>
+          <button id="yesBtn"><strong>Yes</strong> 🥰</button>
+          <button id="noBtn"><strong>No</strong> 🙈</button>
         </div>
       </div>
     </div>
@@ -99,7 +98,18 @@
     <!-- ========================= -->
     <!-- POEM SCREEN -->
     <!-- ========================= -->
-
+    <div id="prePoemScreen" class="hidden pre-poem-screen">
+      <div class="pre-poem-content">
+        <h2 class="pre-poem-line">
+          Some things are easier written than said.
+        </h2>
+    
+        <button id="readPoemBtn" class="pre-poem-btn">
+          Read what I wrote for you 📜
+        </button>
+      </div>
+    </div>
+    
     <div id="poemScreen" class="hidden">
 
       <div class="poem-content">
@@ -113,17 +123,40 @@
     <div class="final-screen hidden" id="finalScreen">
       <h1>You Chose Infinite Love ❤️</h1>
       <p>Lifetime subscription activated!</p>
-      <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="250">
+      <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" class="final-gif">
     </div>
 
 
     <!-- Audio -->
     <audio id="romanticMusic" src="romantic.mp3" loop></audio>
-
+    <button id="musicToggle" class="music-btn hidden">🔊</button>
 
     <script src="script.js"></script>
 
-  </div>
+    <div id="closingScreen" class="hidden closing-screen">
+      <div class="closing-content">
+    
+        <h1 class="closing-line line1">
+          Let’s write the rest of our story together.
+        </h1>
+    
+        <h1 class="closing-line line2">
+          To a lifetime of us.
+        </h1>
+    
+        <h2 class="closing-sub line3">
+          Happy Valentine’s Day, Kritti!
+        </h2>
+    
+        <h2 class="closing-sub line4">
+          Yours, Shreyas.
+        </h2>
+    
+      </div>
+    </div>
+    
+
+  </div>  
 
 </body>
 
