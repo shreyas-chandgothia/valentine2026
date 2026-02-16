@@ -17,7 +17,7 @@ noBtn.classList.add("move-playful");
 let musicStarted = false;
 let noClickCount = 0;
 let lastSide = null;
-
+let yesUnlocked = false;
 
 // =========================
 // STAGE DATA
@@ -28,41 +28,49 @@ const stageData = {
     title: "Where It Began",
     caption: "Two Chandigarh kids. One Bombay campus.",
     photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpeg","img5.jpg","img6.jpg","img7.jpg","img8.jpeg"]
+    // photos: ["img1.jpg"]
   },
   2019: {
     title: "Becoming Us",
     caption: "From hello to something more.",
     photos: ["img1.jpg","img2.jpeg","img3.jpeg","img4.jpg","img5.jpg","img6.jpg","img7.jpeg","img8.jpeg","img9.jpg","img10.jpg"]
+    // photos: ["img1.jpg","img2.jpeg"]
   },
   2020: {
     title: "The World Paused",
     caption: "The world shut down. We didn’t.",
     photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg","img7.jpg","img8.jpg","img9.jpg","img10.jpg"]
+    // photos: ["img1.jpg","img2.jpg","img3.jpg"]
   },
   2021: {
     title: "Holding On",
     caption: "Screens, silence, stubborn love.",
     photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg","img7.jpg","img8.jpeg","img9.jpg","img10.jpg"]
+    // photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg"]
   },
   2022: {
     title: "Two Continents",
     caption: "You chased stars. I stayed back.",
     photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg","img7.jpg","img8.jpg","img9.jpg","img10.jpg"]
+    // photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg"]
   },
   2023: {
     title: "Becoming Ourselves",
     caption: "Different cities. Same heartbeat.",
     photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg","img7.jpg","img8.jpg","img9.jpg","img10.jpg"]
+    // photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg"]
   },
   2024: {
     title: "Still Choosing Us",
     caption: "Not perfect. Just persistent.",
     photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg","img7.png","img8.jpeg","img9.jpg","img10.jpg"]
+    // photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg","img7.png"]
   },
   2025: {
     title: "Almost There",
     caption: "Planning futures across time zones.",
     photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg","img7.jpg","img8.jpg","img9.jpg","img10.jpg"]
+    // photos: ["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg","img7.jpg","img8.jpg"]
   },
   2026: {
     title: "The Future",
@@ -142,15 +150,10 @@ function showBubble(message) {
 
 yesBtn.addEventListener("click", () => {
 
-  if (noClickCount === 0) {
+  if (!yesUnlocked) {
     showBubble("Aren’t you curious what happens if you click No? 👀");
     return;
   }
-
-  // Immediately freeze No button to prevent jump glitch
-  noBtn.style.transition = "none";
-  noBtn.style.pointerEvents = "none";
-  noBtn.style.opacity = "0";
 
   // Final Yes after chaos
   // Animate envelope slightly
@@ -241,6 +244,8 @@ noBtn.addEventListener("click", () => {
     noBtn.innerHTML = "<strong>No</strong> (You sure? 😋)";
     noBtn.style.backgroundColor = "white";
     noBtn.style.color = "#ff4d6d";
+    noBtn.style.setProperty('--btn-glow', 'rgba(255, 77, 109, 0.4)');
+    noBtn.style.setProperty('--btn-glow-hover', 'rgba(255, 77, 109, 0.6)');
   } else if (noClickCount === 2) {
     noBtn.innerHTML = "<strong>No</strong> (Think again 😘)";
   } else if (noClickCount === 3) {
@@ -249,6 +254,8 @@ noBtn.addEventListener("click", () => {
     noBtn.innerHTML = "<strong>No</strong> (Determined huh? 🤭)";
   } else {
     noBtn.style.display = "none";
+    noBtn.style.opacity = "0";
+    yesUnlocked = true;
     showBubble("System Override Activated ❤️");
     return;
   }
@@ -258,7 +265,8 @@ noBtn.addEventListener("click", () => {
 
   const envelopeRect = envelope.getBoundingClientRect();
   const btnRect = noBtn.getBoundingClientRect();
-  const gap = 80;
+  const topGap = 80;
+  const sideGap = 60;
 
   let side;
 
@@ -281,23 +289,23 @@ noBtn.addEventListener("click", () => {
   let newX, newY;
   if (side === 0) {
     // Left
-    newX = envelopeRect.left - btnRect.width - gap;
+    newX = envelopeRect.left - btnRect.width - sideGap;
     newY = envelopeRect.top + Math.random() * (envelopeRect.height - btnRect.height);
   }
   if (side === 1) {
     // Right
-    newX = envelopeRect.right + gap;
+    newX = envelopeRect.right + sideGap;
     newY = envelopeRect.top + Math.random() * (envelopeRect.height - btnRect.height);
   }
   if (side === 2) {
     // Top
     newX = envelopeRect.left + Math.random() * (envelopeRect.width - btnRect.width);
-    newY = envelopeRect.top - btnRect.height - gap;
+    newY = envelopeRect.top - btnRect.height - topGap;
   }
   if (side === 3) {
     // Bottom
     newX = envelopeRect.left + Math.random() * (envelopeRect.width - btnRect.width);
-    newY = envelopeRect.bottom + gap;
+    newY = envelopeRect.bottom + sideGap;
   }
 
   newX = Math.max(10, Math.min(newX, window.innerWidth - btnRect.width - 10));
@@ -389,14 +397,14 @@ function initializeGrid() {
       </div>
     `;
 
-    // TEMP DEBUG — allow 2026 to open immediately
-    if (year === "2026") {
-      div.classList.add("locked");
-    }
+    // 2026 starts locked until all previous years opened
+    // if (year === "2026") {
+    //   div.classList.add("locked");
+    // }
 
     div.addEventListener("click", () => {
       if (div.classList.contains("locked")) return;
-      openStage(year, true);
+      openStage(year);
     });
 
     div.classList.remove("show");   // ensure hidden state
@@ -420,10 +428,11 @@ function showGridScreen() {
 }
 
 
-function openStage(year, fromGrid = true) {
+function openStage(year) {
 
   const data = stageData[year];
   currentStageYear = String(year);
+  document.getElementById("turnFinalPage").style.display = "none";
 
   const grid = document.getElementById("gridScreen");
   const stage = document.getElementById("stageScreen");
@@ -437,6 +446,7 @@ function openStage(year, fromGrid = true) {
   const captionEl = document.getElementById("stageCaption");
   const buttonsEl = document.querySelector(".stage-buttons");
   const photoContainer = document.querySelector(".photo-container");
+  const turnFinalBtn = document.getElementById("turnFinalPage");
   
   const stageContent = document.querySelector(".stage-content");
 
@@ -455,26 +465,17 @@ function openStage(year, fromGrid = true) {
   stageContent.classList.remove("no-transition");
   
 
-  if (fromGrid) {
-
-    // Grid → Stage animation
-    setTimeout(() => {
-      grid.style.transition = "opacity 0.8s ease";
-      grid.style.opacity = "0";
-    }, 500);
+  setTimeout(() => {
+    grid.style.transition = "opacity 0.8s ease";
+    grid.style.opacity = "0";
+  }, 500);
   
-    setTimeout(() => {
-      grid.classList.remove("show-screen");
-      grid.style.opacity = "1";
-      stage.classList.add("show-screen");
-    }, 1300);
-  
-  } else {
-  
-    // Already inside stage (Next Chapter)
+  setTimeout(() => {
+    grid.classList.remove("show-screen");
+    grid.style.opacity = "1";
     stage.classList.add("show-screen");
+  }, 1300);
   
-  }  
   
   document.getElementById("stageTitle").textContent = `${year}: ${data.title}`;
   document.getElementById("stageYear").style.display = "none";
@@ -488,9 +489,7 @@ function openStage(year, fromGrid = true) {
     captionEl.textContent = data.caption;
   }
   
-
-  // Different base delay depending on entry type
-  const baseDelay = fromGrid ? 2000 : 1000;
+  const baseDelay = 2000;
 
   // Title
   setTimeout(() => {
@@ -517,34 +516,43 @@ function openStage(year, fromGrid = true) {
   
   } else {
   
-  
     setTimeout(() => {
       captionEl.classList.add("stage-visible");
     }, baseDelay + 2000);
   
   }
   
+  // ----- Two Row Layout -----
 
-  // ----- Dynamic Grid Layout -----
+  const total = data.photos.length;
+  const firstRowCount = Math.ceil(total / 2);
+  const secondRowCount = Math.floor(total / 2);
 
-  const photoCount = data.photos.length;
-  let columns;
+  // Clear container
+  photoContainer.innerHTML = "";
 
-  if (photoCount <= 6) columns = 3;
-  else if (photoCount === 7 || photoCount === 8) columns = 4;
-  else columns = 5;
+  // Create two rows
+  const row1 = document.createElement("div");
+  const row2 = document.createElement("div");
 
-  photoContainer.style.gridTemplateColumns = `repeat(${columns}, max-content)`;
+  row1.classList.add("photo-row");
+  row2.classList.add("photo-row");
 
-  
-  // Photos
+  photoContainer.appendChild(row1);
+  photoContainer.appendChild(row2);
+
+  // Render photos
   data.photos.forEach((photo, index) => {
 
     const img = document.createElement("img");
     img.src = `photos/${year}/${photo}`;
     img.style.setProperty("--rotate", (Math.random()*10 - 5) + "deg");
 
-    photoContainer.appendChild(img);
+    if (index < firstRowCount) {
+      row1.appendChild(img);
+    } else {
+      row2.appendChild(img);
+    }
 
     setTimeout(() => {
       img.classList.add("show");
@@ -553,46 +561,50 @@ function openStage(year, fromGrid = true) {
   });
 
 
-  // Buttons
+
   if (year === "2026") {
 
+    const backBtn = document.getElementById("backToGrid");
+  
+    // Reset both buttons first
+    backBtn.classList.remove("stage-visible");
+    turnFinalBtn.classList.remove("stage-visible");
+  
+    // Make sure both are visible in layout
+    turnFinalBtn.style.display = "inline-block";
+  
+    // Back button fades in at +7000
     setTimeout(() => {
-      buttonsEl.classList.add("stage-visible");
+      backBtn.classList.add("stage-visible");
+    }, baseDelay + 7000);
+  
+    // Turn Final fades in at +8000
+    setTimeout(() => {
+      turnFinalBtn.classList.add("stage-visible");
     }, baseDelay + 8000);
   
   } else {
+
+    const backBtn = document.getElementById("backToGrid");
+  
+    backBtn.classList.remove("stage-visible");
+    turnFinalBtn.classList.remove("stage-visible");
+    turnFinalBtn.style.display = "none";
   
     setTimeout(() => {
-      buttonsEl.classList.add("stage-visible");
+      backBtn.classList.add("stage-visible");
     }, baseDelay + 4000 + data.photos.length * 1000 + 1000);
   
   }
   
-  
-
   if (year !== "2026") {
     openedYears.add(year);
     markEnvelopeOpened(year);
-    checkUnlock2026();
   }
 
-  const nextBtn = document.getElementById("nextStage");
-
-  if (year === "2026") {
-    nextBtn.textContent = "Turn the Final Page ➡";
-  } else {
-    nextBtn.textContent = "Next Chapter ➡";
-  }
-  
-
-  if (year === "2025" && document.querySelector(".envelope-item.locked")) {
-    nextBtn.disabled = true;
-    nextBtn.style.opacity = "0.5";
-    nextBtn.style.cursor = "not-allowed";
-  } else {
-    nextBtn.disabled = false;
-    nextBtn.style.opacity = "1";
-    nextBtn.style.cursor = "pointer";
+  // Unlock 2026 if all other years opened
+  if (openedYears.size === 8) {
+    unlockFinalEnvelope();
   }
 
 }
@@ -607,16 +619,19 @@ function markEnvelopeOpened(year) {
   });
 }
 
-function checkUnlock2026() {
-  if (openedYears.size === 8) {
-    const envelopes = document.querySelectorAll(".envelope-item");
-    envelopes.forEach(el => {
-      if (el.querySelector(".env-year")?.textContent === "2026") {
-        el.classList.remove("locked");
-      }
-    });
-  }
+function unlockFinalEnvelope() {
+
+  const envelopes = document.querySelectorAll(".envelope-item");
+
+  envelopes.forEach(el => {
+    if (el.querySelector(".env-year")?.textContent === "2026") {
+      el.classList.remove("locked");
+      el.classList.add("show"); // ensure visible animation state
+    }
+  });
+
 }
+
 
 
 document.getElementById("backToGrid").addEventListener("click", () => {
@@ -629,31 +644,10 @@ document.getElementById("backToGrid").addEventListener("click", () => {
 });
 
 
-document.getElementById("nextStage").addEventListener("click", () => {
-
-  if (currentStageYear === "2026") {
-    fadeOutStage(() => {
-      showPrePoemScreen();
-    });
-    return;
-  }
-  
-
-  const years = Object.keys(stageData);
-  const index = years.indexOf(currentStageYear);
-
-  if (index === -1 || index >= years.length - 1) return;
-
-  const nextYear = years[index + 1];
-
-  const lockedEnvelope = document.querySelector(".envelope-item.locked");
-
-  if (nextYear === "2026" && lockedEnvelope) return;
-
+document.getElementById("turnFinalPage")?.addEventListener("click", () => {
   fadeOutStage(() => {
-    openStage(nextYear, false);
+    showPrePoemScreen();
   });
-
 });
 
 
@@ -866,8 +860,8 @@ function launchPoem() {
     continueBtn.innerText = "Continue ➡ ❤️";
     continueBtn.classList.add("poem-continue-btn");
 
-    const poemScreen = document.getElementById("poemScreen");
-    poemScreen.appendChild(continueBtn);
+    const wrapper = document.querySelector(".poem-continue-wrapper");
+    wrapper.appendChild(continueBtn);    
 
     // Force initial state
     void continueBtn.offsetWidth;
@@ -895,8 +889,9 @@ function showPrePoemScreen() {
   // Reset initial state
   line.style.opacity = "0";
   line.style.transform = "translateY(20px)";
-  btn.style.opacity = "0";
-  btn.style.transform = "translateY(20px)";
+  setTimeout(() => {
+    btn.classList.add("visible");
+  }, 3000);
 
   // Fade in line first
   setTimeout(() => {
@@ -907,9 +902,7 @@ function showPrePoemScreen() {
 
   // Then button
   setTimeout(() => {
-    btn.style.transition = "opacity 1.2s ease, transform 1.2s ease";
     btn.style.opacity = "1";
-    btn.style.transform = "translateY(0)";
   }, 3000);
 
 }

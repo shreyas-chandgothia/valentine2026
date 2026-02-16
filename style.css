@@ -3,7 +3,7 @@ body {
   height: 100vh;
   background: #ffc0cb;
   font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.3px;
   overflow: hidden;
   display: flex;
@@ -20,7 +20,7 @@ body {
 
 .envelope {
   background: white;
-  padding: 40px;
+  padding: 30px;
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
   transition: transform 0.6s ease;
@@ -36,11 +36,11 @@ body {
 
 .bubble {
   position: absolute;
-  top: -75px;
+  top: -60px;
   left: 50%;
   transform: translateX(-50%) scale(0.8);
   background: white;
-  padding: 14px 22px;
+  padding: 8px 16px;
   border-radius: 25px;
   font-size: 20px;
   font-weight: 600;
@@ -65,19 +65,38 @@ button {
   font-size: 18px;
   margin: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 500;
 }
 
+:root {
+  --btn-glow: rgba(0, 0, 0, 0.3);
+  --btn-glow-hover: rgba(0, 0, 0, 0.5);
+}
+
 #yesBtn {
   background-color: #fa778f;
   color: white;
+  box-shadow: 0 6px 18px rgba(255, 77, 109, 0.5);
 }
 
 #noBtn {
   background-color: #ccc;
+  color: #333;
+  box-shadow: 0 6px 18px var(--btn-glow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#yesBtn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(255, 77, 109, 0.7);
+}
+
+#noBtn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px var(--btn-glow-hover);
 }
 
 .hidden {
@@ -178,14 +197,14 @@ button {
 #storyLine1,
 #storyLine2 {
   font-family: 'DM Serif Display', serif;
-  color: #ffffff;
+  color: white;
   font-size: 40px;
   letter-spacing: 0.5px;
 }
 
 #storyLine3 {
   font-family: 'Great Vibes', cursive;
-  color: #ffe4ec;
+  color: white;
   font-size: 80px;
   margin-top: 30px;
 }
@@ -229,7 +248,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: translateY(-10px);
+  /* transform: translateY(-10px); */
 }
 
 
@@ -237,7 +256,7 @@ button {
 
 .grid-title {
   font-size: 52px;
-  margin-bottom: 50px;
+  margin: 0 auto 40px auto;
   font-family: 'DM Serif Display', serif;
   color: #ff4d6d;
   letter-spacing: 1px;
@@ -361,7 +380,7 @@ button {
   font-family: 'DM Serif Display', serif;
   font-size: 28px;   /* Increased from 22px */
   font-weight: 600;
-  color: #ffffff;
+  color: white;
   letter-spacing: 1px;
   pointer-events: none;
 }
@@ -409,7 +428,7 @@ button {
   text-align: center;
   max-width: 1100px;
   width: 90%;
-  transform: translateY(-10px);
+  /* transform: translateY(-10px); */
 }
 
 
@@ -487,19 +506,24 @@ button {
 
 
 .photo-container {
-  display: grid;
-  justify-content: center;   /* centers whole grid */
-  justify-items: center;     /* centers items inside each grid cell */
-  align-items: center;       /* vertical alignment inside cells */
-  gap: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 10px;
-  grid-auto-flow: row;
+}
+
+.photo-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
 
 
+
 .photo-container img {
-  height: 230px;      /* controls visual size */
+  height: 220px;      /* controls visual size */
   width: auto;        /* preserve aspect ratio */
   object-fit: contain;
 
@@ -520,6 +544,13 @@ button {
 }
 
 
+.stage-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
 .stage-buttons button {
   padding: 10px 20px;
   font-size: 16px;
@@ -534,25 +565,30 @@ button {
     0 6px 20px rgba(255,77,109,0.6),
     0 0 15px rgba(255,77,109,0.4);
 
-  transition: transform 0.3s ease;
-}
-
-.stage-buttons button:hover {
-  transform: translateY(-4px);
-}
-
-#stageTitle,
-#stageCaption,
-.stage-buttons {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.stage-visible {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+.stage-buttons button.stage-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
+
+.stage-buttons button:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 22px rgba(255,77,109,0.8),
+    0 0 17px rgba(255,77,109,0.6);
+}
+
+
+#stageTitle.stage-visible,
+#stageCaption.stage-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 
 /* ========================= */
@@ -599,14 +635,26 @@ button {
   font-weight: 600;
   background: linear-gradient(135deg, #ff6f91, #ff4d6d);
   color: white;
+
   box-shadow:
     0 6px 20px rgba(255,77,109,0.6),
     0 0 15px rgba(255,77,109,0.4);
-  transition: transform 0.3s ease;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 0.3s ease;
+}
+
+.pre-poem-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .pre-poem-btn:hover {
   transform: translateY(-4px);
+  box-shadow:
+    0 8px 22px rgba(255,77,109,0.8),
+    0 0 17px rgba(255,77,109,0.6);
 }
 
 
@@ -621,11 +669,11 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 5px;
+  padding: 10px 20px;
   z-index: 7;
   background: transparent;
+  overflow-y: auto;
 }
-
 
 
 .poem-content {
@@ -648,7 +696,7 @@ button {
   transform: translateY(25px);
   transition: opacity 1.2s ease, transform 1.2s ease;
   margin-bottom: 0;   /* grid handles spacing */
-  font-size: 19px;
+  font-size: 20px;
 }
 
 .stanza.visible {
@@ -663,7 +711,8 @@ button {
 
 .poem-content h2 {
   font-family: 'DM Serif Display', serif;
-  font-size: 38px;
+  font-size: 40px;
+  color: #ffd1dc;
   margin: 0 0 0 0;
   text-shadow:
     0 4px 15px rgba(0,0,0,0.8),
@@ -671,43 +720,47 @@ button {
 }
 
 .poem-continue-btn {
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
+  display: block;
+  margin: 5px auto 0 auto;   /* auto centers horizontally */
 
-  background: #ff9ab3;   /* lighter pink */
+  background: linear-gradient(135deg, #ff9ab3, #ff6f91);
   color: #ff2e63;
   border: none;
   border-radius: 30px;
 
   padding: 8px 16px;
-  font-size: 15px;      /* same as stanza size */
+  font-size: 16px;
   font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
+  font-weight: 500;
 
-  box-shadow:
-    0 4px 15px rgba(255, 120, 150, 0.4);
+  box-shadow: 0 4px 15px rgba(255, 120, 150, 0.4);
 
   cursor: pointer;
-  transition: all 0.3s ease;
 
   opacity: 0;
-  transform: translateX(-50%) translateY(20px);
+  transform: translateY(20px);
   transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
+
 .poem-continue-btn.visible {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 
 .poem-continue-btn:hover {
-  transform: translateX(-50%) translateY(-3px);
-  box-shadow:
-    0 6px 20px rgba(255, 120, 150, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 17px rgba(255, 120, 150, 0.6);
 }
+
+.poem-continue-wrapper {
+  min-height: 50px;            /* Reserve vertical space */
+  display: flex;
+  justify-content: center; /* Always centered */
+  align-items: center;
+}
+
 
 
 /* ========================= */
@@ -737,7 +790,7 @@ button {
   font-family: 'Great Vibes', cursive;
   font-size: 72px;
   margin: 10px 0;
-  color: #ffe6ee;
+  color: white;
 
   text-shadow:
     0 4px 15px rgba(0,0,0,0.8),
