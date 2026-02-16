@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100dvh;
   background: #ffc0cb;
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
@@ -86,7 +86,6 @@ button {
   background-color: #ccc;
   color: #333;
   box-shadow: 0 6px 18px var(--btn-glow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #yesBtn:hover {
@@ -900,6 +899,18 @@ button {
     align-items: center;
   }
 
+  #gridScreen {
+    justify-content: center;
+    padding-top: 40px;
+    overflow-y: auto;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 90vw;
+  }
+
   .grid-title {
     font-size: 32px;
     margin-bottom: 30px;
@@ -908,13 +919,57 @@ button {
   .grid-container {
     width: 90vw;
     gap: 25px;
+    justify-items: center;
   }
 
   .envelope-item {
-    max-width: 160px;
+    max-width: 150px;
   }
 
   .env-year {
     font-size: 20px;
   }
+
+  #stageScreen {
+    align-items: center;
+    padding-top: 40px;
+    overflow-y: auto;
+  }
+
+  .photo-container {
+    flex-direction: column;
+    height: 160px;
+  }
+
+  .photo-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .photo-row img {
+    flex: 0 0 45%;
+  }
+
+  #poemScreen {
+    justify-content: flex-start;
+    padding-top: 40px;
+    overflow-y: auto;
+  }
+
+  #poemText {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .stanza {
+    font-size: 18px;
+  }
+
+  .closing-line {
+    font-size: 48px;
+  }
+  .closing-sub {
+    font-size: 26px;
+  }
+
 }

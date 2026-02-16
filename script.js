@@ -398,9 +398,9 @@ function initializeGrid() {
     `;
 
     // 2026 starts locked until all previous years opened
-    // if (year === "2026") {
-    //   div.classList.add("locked");
-    // }
+    if (year === "2026") {
+      div.classList.add("locked");
+    }
 
     div.addEventListener("click", () => {
       if (div.classList.contains("locked")) return;
